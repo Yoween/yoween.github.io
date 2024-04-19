@@ -3,6 +3,15 @@
 <head>
     <title>Captcha Drapeaux</title>
     <style>
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+        .header h2 {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
         .grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -18,7 +27,13 @@
     </style>
 </head>
 <body>
-    <h1 id="prompt">Cliquez sur le drapeau de: </h1>
+    <div class="header">
+        <h1 id="prompt">Cliquez sur le drapeau de: </h1>
+        <h2>
+            <span id="streak">🔥0</span>
+            <span id="attempts">❤️❤️❤️</span>
+        </h2>
+    </div>
     <div class="grid" id="flags">
         <!-- Images will be inserted here by JavaScript -->
     </div>
@@ -34,10 +49,13 @@
         var attempts = 0;
     
         // Counter for streak
-        var streak = 0;
+        var streak = localStorage.getItem('streak') ? parseInt(localStorage.getItem('streak')) : 0;
     
         // Display the chosen country in the prompt
         document.getElementById("prompt").textContent += code_pays_choisi.toUpperCase();
+
+        // Display the streak
+        document.getElementById("streak").textContent = "🔥" + streak;
     
         // Remove the chosen country from the list
         codes_pays = codes_pays.filter(code => code !== code_pays_choisi);
@@ -70,20 +88,53 @@
         function verifier(code_pays) {
             attempts++;
             if (code_pays === code_pays_choisi) {
-                alert("Ouais, série de " + (++streak) + "!");
+                streak++;
+                localStorage.setItem('streak', streak); // Save the streak to localStorage
                 attempts = 0;
-                location.reload();
+                resetGame(); // Reset the game state
             } else {
                 if (attempts >= 3) {
-                    alert("Bah nan, le bon drapeau c'était : " + code_pays_choisi.toUpperCase());
                     attempts = 0;
                     streak = 0;
-                    location.reload();
+                    localStorage.setItem('streak', streak); // Reset the streak in localStorage
+                    resetGame(); // Reset the game state
                 } else {
-                    alert("Eh nan");
+                    document.getElementById("attempts").textContent = "❤️".repeat(3 - attempts);
                 }
             }
         }
-        </script>
-    </body> 
-    </html>
+
+        // Reset the game state
+        function resetGame() {
+            // Reset variables
+            attempts = 0;
+            code_pays_choisi = codes_pays[Math.floor(Math.random() * codes_pays.length)];
+            codes_pays = ["us", "fr", "de", "it", "es", "jp", "cn", "ru", "in", "br", "ca", "au", "za", "mx", "ar", "ch", "se", "no", "fi", "dk"];
+            codes_pays = codes_pays.filter(code => code !== code_pays_choisi);
+            autres_pays = [];
+            for (var i = 0; i < 15; i++) {
+                var randomIndex = Math.floor(Math.random() * codes_pays.length);
+                autres_pays.push(codes_pays[randomIndex]);
+                codes_pays.splice(randomIndex, 1);
+            }
+            autres_pays.push(code_pays_choisi);
+            autres_pays.sort(() => Math.random() - 0.5);
+
+            // Update UI
+            document.getElementById("prompt").textContent = "Cliquez sur le drapeau de: " + code_pays_choisi.toUpperCase();
+            document.getElementById("streak").textContent = "🔥" + streak;
+            document.getElementById("attempts").textContent = "❤️❤️❤️";
+            while (grid.firstChild) {
+                grid.removeChild(grid.firstChild);
+            }
+            autres_pays.forEach(code => {
+                var img = document.createElement("img");
+                img.src = "images/" + code + ".png";
+                img.alt = code.toUpperCase();
+                img.onclick = function() { verifier(code); };
+                grid.appendChild(img);
+            });
+        }
+    </script>
+</body> 
+</html>
