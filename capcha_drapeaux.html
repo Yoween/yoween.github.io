@@ -24,51 +24,60 @@
     </div>
 
     <script>
-    // List of country codes
-    var codes_pays = ["us", "fr", "de", "it", "es", "jp", "cn", "ru", "in", "br", "ca", "au", "za", "mx", "ar", "ch", "se", "no", "fi", "dk"];
+        // List of country codes
+        var codes_pays = ["us", "fr", "de", "it", "es", "jp", "cn", "ru", "in", "br", "ca", "au", "za", "mx", "ar", "ch", "se", "no", "fi", "dk"];
+        
+        // Choose a random country
+        var code_pays_choisi = codes_pays[Math.floor(Math.random() * codes_pays.length)];
     
-    // Choose a random country
-    var code_pays_choisi = codes_pays[Math.floor(Math.random() * codes_pays.length)];
-
-    // Display the chosen country in the prompt
-    document.getElementById("prompt").textContent += code_pays_choisi.toUpperCase();
-
-    // Remove the chosen country from the list
-    codes_pays = codes_pays.filter(code => code !== code_pays_choisi);
-
-    // Choose 15 other countries at random
-    var autres_pays = [];
-    for (var i = 0; i < 15; i++) {
-        var randomIndex = Math.floor(Math.random() * codes_pays.length);
-        autres_pays.push(codes_pays[randomIndex]);
-        codes_pays.splice(randomIndex, 1);
-    }
-
-    // Add the chosen country to the list
-    autres_pays.push(code_pays_choisi);
-
-    // Shuffle the list
-    autres_pays.sort(() => Math.random() - 0.5);
-
-    // Insert the images into the grid
-    var grid = document.getElementById("flags");
-    autres_pays.forEach(code => {
-        var img = document.createElement("img");
-        img.src = "images/" + code + ".png";
-        img.alt = code.toUpperCase();
-        img.onclick = function() { verifier(code); };
-        grid.appendChild(img);
-    });
-
-    // Verify the user's choice
-    function verifier(code_pays) {
-        if (code_pays === code_pays_choisi) {
-            alert("Correct!");
-            location.reload();
-        } else {
-            alert("Incorrect, please try again.");
+        // Counter for attempts
+        var attempts = 0;
+    
+        // Display the chosen country in the prompt
+        document.getElementById("prompt").textContent += code_pays_choisi.toUpperCase();
+    
+        // Remove the chosen country from the list
+        codes_pays = codes_pays.filter(code => code !== code_pays_choisi);
+    
+        // Choose 15 other countries at random
+        var autres_pays = [];
+        for (var i = 0; i < 15; i++) {
+            var randomIndex = Math.floor(Math.random() * codes_pays.length);
+            autres_pays.push(codes_pays[randomIndex]);
+            codes_pays.splice(randomIndex, 1);
         }
-    }
-    </script>
-</body> 
-</html>
+    
+        // Add the chosen country to the list
+        autres_pays.push(code_pays_choisi);
+    
+        // Shuffle the list
+        autres_pays.sort(() => Math.random() - 0.5);
+    
+        // Insert the images into the grid
+        var grid = document.getElementById("flags");
+        autres_pays.forEach(code => {
+            var img = document.createElement("img");
+            img.src = "images/" + code + ".png";
+            img.alt = code.toUpperCase();
+            img.onclick = function() { verifier(code); };
+            grid.appendChild(img);
+        });
+    
+        // Verify the user's choice
+        function verifier(code_pays) {
+            attempts++;
+            if (code_pays === code_pays_choisi) {
+                alert("Ouais");
+                location.reload();
+            } else {
+                if (attempts >= 3) {
+                    alert("Bah nan, le bon drapeau c'était : " + code_pays_choisi.toUpperCase());
+                    location.reload();
+                } else {
+                    alert("Eh nan");
+                }
+            }
+        }
+        </script>
+    </body> 
+    </html>
