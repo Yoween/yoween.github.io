@@ -33,6 +33,9 @@
         // Counter for attempts
         var attempts = 0;
     
+        // Counter for streak
+        var streak = 0;
+    
         // Display the chosen country in the prompt
         document.getElementById("prompt").textContent += code_pays_choisi.toUpperCase();
     
@@ -67,11 +70,14 @@
         function verifier(code_pays) {
             attempts++;
             if (code_pays === code_pays_choisi) {
-                alert("Ouais");
+                alert("Ouais, série de " + (++streak) + "!");
+                attempts = 0;
                 location.reload();
             } else {
                 if (attempts >= 3) {
                     alert("Bah nan, le bon drapeau c'était : " + code_pays_choisi.toUpperCase());
+                    attempts = 0;
+                    streak = 0;
                     location.reload();
                 } else {
                     alert("Eh nan");
