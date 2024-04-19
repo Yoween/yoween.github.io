@@ -39,77 +39,29 @@
     </div>
 
     <script>
-        // List of country codes
-        codes_pays = ['ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'ao', 'aq', 'ar', 'as', 'at', 'au', 'aw', 'ax', 'az', 'ba', 'bb', 'bd', 'be', 'bf', 'bg', 'bh', 'bi', 'bj', 'bl', 'bm', 'bn', 'bo', 'bq', 'br', 'bs', 'bt', 'bv', 'bw', 'by', 'bz', 'ca', 'cc', 'cd', 'cf', 'cg', 'ch', 'ci', 'ck', 'cl', 'cm', 'cn', 'co', 'cr', 'cu', 'cv', 'cw', 'cx', 'cy', 'cz', 'de', 'dj', 'dk', 'dm', 'do', 'dz', 'ec', 'ee', 'eg', 'eh', 'er', 'es', 'et', 'fi', 'fj', 'fk', 'fm', 'fo', 'fr', 'ga', 'gb-eng', 'gb-nir', 'gb-sct', 'gb-wls', 'gb', 'gd', 'ge', 'gf', 'gg', 'gh', 'gi', 'gl', 'gm', 'gn', 'gp', 'gq', 'gr', 'gs', 'gt', 'gu', 'gw', 'gy', 'hk', 'hm', 'hn', 'hr', 'ht', 'hu', 'id', 'ie', 'il', 'im', 'in', 'io', 'iq', 'ir', 'is', 'it', 'je', 'jm', 'jo', 'jp', 'ke', 'kg', 'kh', 'ki', 'km', 'kn', 'kp', 'kr', 'kw', 'ky', 'kz', 'la', 'lb', 'lc', 'li', 'lk', 'lr', 'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mf', 'mg', 'mh', 'mk', 'ml', 'mm', 'mn', 'mo', 'mp', 'mq', 'mr', 'ms', 'mt', 'mu', 'mv', 'mw', 'mx', 'my', 'mz', 'na', 'nc', 'ne', 'nf', 'ng', 'ni', 'nl', 'no', 'np', 'nr', 'nu', 'nz', 'om', 'pa', 'pe', 'pf', 'pg', 'ph', 'pk', 'pl', 'pm', 'pn', 'pr', 'ps', 'pt', 'pw', 'py', 'qa', 're', 'ro', 'rs', 'ru', 'rw', 'sa', 'sb', 'sc', 'sd', 'se', 'sg', 'sh', 'si', 'sj', 'sk', 'sl', 'sm', 'sn', 'so', 'sr', 'ss', 'st', 'sv', 'sx', 'sy', 'sz', 'tc', 'td', 'tf', 'tg', 'th', 'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tr', 'tt', 'tv', 'tw', 'tz', 'ua', 'ug', 'um', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf', 'ws', 'xk', 'ye', 'yt', 'za', 'zm', 'zw'];
-        
-        // Choose a random country
-        var code_pays_choisi = codes_pays[Math.floor(Math.random() * codes_pays.length)];
-    
+        // Original list of country codes
+        var original_codes_pays = ['ad', 'ae', 'af', 'ag', 'ai', 'al', 'am', 'ao', 'aq', 'ar', 'as', 'at', 'au', 'aw', 'ax', 'az', 'ba', 'bb', 'bd', 'be', 'bf', 'bg', 'bh', 'bi', 'bj', 'bl', 'bm', 'bn', 'bo', 'bq', 'br', 'bs', 'bt', 'bv', 'bw', 'by', 'bz', 'ca', 'cc', 'cd', 'cf', 'cg', 'ch', 'ci', 'ck', 'cl', 'cm', 'cn', 'co', 'cr', 'cu', 'cv', 'cw', 'cx', 'cy', 'cz', 'de', 'dj', 'dk', 'dm', 'do', 'dz', 'ec', 'ee', 'eg', 'eh', 'er', 'es', 'et', 'fi', 'fj', 'fk', 'fm', 'fo', 'fr', 'ga', 'gb-eng', 'gb-nir', 'gb-sct', 'gb-wls', 'gb', 'gd', 'ge', 'gf', 'gg', 'gh', 'gi', 'gl', 'gm', 'gn', 'gp', 'gq', 'gr', 'gs', 'gt', 'gu', 'gw', 'gy', 'hk', 'hm', 'hn', 'hr', 'ht', 'hu', 'id', 'ie', 'il', 'im', 'in', 'io', 'iq', 'ir', 'is', 'it', 'je', 'jm', 'jo', 'jp', 'ke', 'kg', 'kh', 'ki', 'km', 'kn', 'kp', 'kr', 'kw', 'ky', 'kz', 'la', 'lb', 'lc', 'li', 'lk', 'lr', 'ls', 'lt', 'lu', 'lv', 'ly', 'ma', 'mc', 'md', 'me', 'mf', 'mg', 'mh', 'mk', 'ml', 'mm', 'mn', 'mo', 'mp', 'mq', 'mr', 'ms', 'mt', 'mu', 'mv', 'mw', 'mx', 'my', 'mz', 'na', 'nc', 'ne', 'nf', 'ng', 'ni', 'nl', 'no', 'np', 'nr', 'nu', 'nz', 'om', 'pa', 'pe', 'pf', 'pg', 'ph', 'pk', 'pl', 'pm', 'pn', 'pr', 'ps', 'pt', 'pw', 'py', 'qa', 're', 'ro', 'rs', 'ru', 'rw', 'sa', 'sb', 'sc', 'sd', 'se', 'sg', 'sh', 'si', 'sj', 'sk', 'sl', 'sm', 'sn', 'so', 'sr', 'ss', 'st', 'sv', 'sx', 'sy', 'sz', 'tc', 'td', 'tf', 'tg', 'th', 'tj', 'tk', 'tl', 'tm', 'tn', 'to', 'tr', 'tt', 'tv', 'tw', 'tz', 'ua', 'ug', 'um', 'us', 'uy', 'uz', 'va', 'vc', 've', 'vg', 'vi', 'vn', 'vu', 'wf', 'ws', 'xk', 'ye', 'yt', 'za', 'zm', 'zw'];
+
+        // Copy of the list to manipulate
+        var codes_pays = [...original_codes_pays];
+
         // Counter for attempts
         var attempts = 0;
-    
+
+        var grid = document.getElementById("flags");
+
         // Counter for streak
         var streak = localStorage.getItem('streak') ? parseInt(localStorage.getItem('streak')) : 0;
-    
-        // Display the chosen country in the prompt
-        document.getElementById("prompt").textContent += code_pays_choisi.toUpperCase();
-
-        // Display the streak
-        document.getElementById("streak").textContent = "🔥" + streak;
-    
-        // Remove the chosen country from the list
-        codes_pays = codes_pays.filter(code => code !== code_pays_choisi);
-    
-        // Choose 15 other countries at random
-        var autres_pays = [];
-        for (var i = 0; i < 15; i++) {
-            var randomIndex = Math.floor(Math.random() * codes_pays.length);
-            autres_pays.push(codes_pays[randomIndex]);
-            codes_pays.splice(randomIndex, 1);
-        }
-    
-        // Add the chosen country to the list
-        autres_pays.push(code_pays_choisi);
-    
-        // Shuffle the list
-        autres_pays.sort(() => Math.random() - 0.5);
-    
-        // Insert the images into the grid
-        var grid = document.getElementById("flags");
-        autres_pays.forEach(code => {
-            var img = document.createElement("img");
-            img.src = "images/" + code + ".png";
-            img.alt = code.toUpperCase();
-            img.onclick = function() { verifier(code); };
-            grid.appendChild(img);
-        });
-    
-        // Verify the user's choice
-        function verifier(code_pays) {
-            attempts++;
-            if (code_pays === code_pays_choisi) {
-                streak++;
-                localStorage.setItem('streak', streak); // Save the streak to localStorage
-                attempts = 0;
-                resetGame(); // Reset the game state
-            } else {
-                if (attempts >= 3) {
-                    attempts = 0;
-                    streak = 0;
-                    localStorage.setItem('streak', streak); // Reset the streak in localStorage
-                    resetGame(); // Reset the game state
-                } else {
-                    document.getElementById("attempts").textContent = "❤️".repeat(3 - attempts);
-                }
-            }
-        }
 
         // Reset the game state
         function resetGame() {
             // Reset variables
             attempts = 0;
+            if (codes_pays.length === 0) {
+                // If all countries have been chosen, reset the list
+                codes_pays = [...original_codes_pays];
+            }
             code_pays_choisi = codes_pays[Math.floor(Math.random() * codes_pays.length)];
-            codes_pays = ["us", "fr", "de", "it", "es", "jp", "cn", "ru", "in", "br", "ca", "au", "za", "mx", "ar", "ch", "se", "no", "fi", "dk"];
             codes_pays = codes_pays.filter(code => code !== code_pays_choisi);
             autres_pays = [];
             for (var i = 0; i < 15; i++) {
@@ -135,6 +87,29 @@
                 grid.appendChild(img);
             });
         }
+
+        // Start the game
+        resetGame();
+
+        // Verify the user's choice
+        function verifier(code_pays) {
+            attempts++;
+            if (code_pays === code_pays_choisi) {
+                streak++;
+                localStorage.setItem('streak', streak); // Save the streak to localStorage
+                attempts = 0;
+                resetGame(); // Reset the game state
+            } else {
+                if (attempts >= 3) {
+                    attempts = 0;
+                    streak = 0;
+                    localStorage.setItem('streak', streak); // Reset the streak in localStorage
+                    resetGame(); // Reset the game state
+                } else {
+                    document.getElementById("attempts").textContent = "❤️".repeat(3 - attempts);
+                }
+            }
+        }
     </script>
-</body> 
+</body>
 </html>
