@@ -53,6 +53,26 @@
         // Counter for streak
         var streak = localStorage.getItem('streak') ? parseInt(localStorage.getItem('streak')) : 0;
 
+        // Fisher-Yates shuffle
+        function shuffle(array) {
+            var currentIndex = array.length, temporaryValue, randomIndex;
+
+            // While there remain elements to shuffle...
+            while (0 !== currentIndex) {
+
+                // Pick a remaining element...
+                randomIndex = Math.floor(Math.random() * currentIndex);
+                currentIndex -= 1;
+
+                // And swap it with the current element.
+                temporaryValue = array[currentIndex];
+                array[currentIndex] = array[randomIndex];
+                array[randomIndex] = temporaryValue;
+            }
+
+            return array;
+        }
+
         // Reset the game state
         function resetGame() {
             // Reset variables
@@ -70,7 +90,7 @@
                 codes_pays.splice(randomIndex, 1);
             }
             autres_pays.push(code_pays_choisi);
-            autres_pays.sort(() => Math.random() - 0.5);
+            shuffle(autres_pays);
 
             // Update UI
             document.getElementById("prompt").textContent = "Cliquez sur le drapeau de: " + code_pays_choisi.toUpperCase();
